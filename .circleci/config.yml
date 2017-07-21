@@ -22,14 +22,13 @@ jobs:
     
     steps:
       - checkout
-
+      - run: mvn install:install-file -DgroupId=org.eclipse.mylyn.github -DartifactId=org.eclipse.egit.github.core -Dversion=3.1.0.201310021548-r -Dpackaging=jar -Dfile=./src/main/assembly/org.eclipse.egit.github.core-3.1.0.201310021548-r.jar
       # Download and cache dependencies
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "pom.xml" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
-
       - run: mvn dependency:go-offline
 
       - save_cache:
